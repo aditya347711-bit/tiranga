@@ -47,7 +47,7 @@ export const AshokaChakraSvg: React.FC<{ className?: string; size?: number }> = 
 
 // Smart Card Gold IC Chip Component
 const SmartChipSvg: React.FC = () => (
-  <svg width="46" height="36" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="48" height="38" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="48" height="38" rx="6" fill="url(#chip-grad)" stroke="#B8860B" strokeWidth="1.5" />
     <path d="M0 12H14V26H0" stroke="#8B6508" strokeWidth="1.2" />
     <path d="M48 12H34V26H48" stroke="#8B6508" strokeWidth="1.2" />
@@ -175,10 +175,10 @@ export const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(
             </div>
 
             {/* MAIN BODY AREA */}
-            <div className="relative z-10 h-[342px] grid grid-cols-12 gap-4 items-center px-6 py-3">
+            <div className="relative z-10 h-[342px] grid grid-cols-12 gap-4 items-center px-6 py-4">
               {/* LEFT: Framed Passport Photo (3 cols) */}
               <div className="col-span-3 flex flex-col items-center">
-                <div className="relative w-[138px] h-[170px] rounded-xl p-1.5 bg-gradient-to-b from-[#FF9933] via-[#D4AF37] to-[#138808] shadow-lg">
+                <div className="relative w-[140px] h-[172px] rounded-xl p-1.5 bg-gradient-to-b from-[#FF9933] via-[#D4AF37] to-[#138808] shadow-lg">
                   <div className="w-full h-full rounded-lg bg-[#FFF9EA] overflow-hidden flex flex-col items-center justify-center text-center relative border-2 border-amber-300/80">
                     {cardData.photo ? (
                       // eslint-disable-next-html-element-suppress
@@ -201,53 +201,43 @@ export const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(
                 </div>
               </div>
 
-              {/* CENTER: User Details (6 cols - Name, ID, Mobile, Address) */}
-              <div className="col-span-6 flex flex-col space-y-2.5 text-slate-900 pr-2">
+              {/* CENTER: User Details (6 cols - Name, ID No., Address) */}
+              <div className="col-span-6 flex flex-col space-y-3.5 text-slate-900 pr-2">
                 {/* Name Field */}
-                <div className="flex items-baseline gap-2 border-b-2 border-dashed border-amber-300/80 pb-1">
-                  <span className="font-black text-base text-[#7A3E00] shrink-0">नाम :</span>
-                  <span className="font-black text-lg text-[#0F172A] truncate tracking-wide">
+                <div className="flex items-center gap-2 border-b-2 border-dashed border-amber-300/80 pb-1.5">
+                  <span className="w-[85px] shrink-0 font-black text-lg text-[#7A3E00]">नाम :</span>
+                  <span className="font-black text-xl text-[#0F172A] truncate tracking-wide">
                     {cardData.name || "______________________"}
                   </span>
                 </div>
 
                 {/* ID No Field */}
-                <div className="flex items-baseline gap-2 border-b-2 border-dashed border-amber-300/80 pb-1">
-                  <span className="font-black text-sm text-[#7A3E00] shrink-0">ID No. :</span>
-                  <span className="font-mono font-black text-base text-amber-950 tracking-wider">
+                <div className="flex items-center gap-2 border-b-2 border-dashed border-amber-300/80 pb-1.5">
+                  <span className="w-[85px] shrink-0 font-black text-base text-[#7A3E00]">ID No. :</span>
+                  <span className="font-mono font-black text-lg text-amber-950 truncate tracking-wider">
                     {cardData.idNo || "______________________"}
                   </span>
                 </div>
 
-                {/* Mobile No Field */}
-                {cardData.phone && (
-                  <div className="flex items-baseline gap-2 border-b-2 border-dashed border-amber-300/80 pb-1">
-                    <span className="font-black text-sm text-[#7A3E00] shrink-0">मोबाइल :</span>
-                    <span className="font-mono font-bold text-base text-slate-900 tracking-wider">
-                      {cardData.phone}
-                    </span>
-                  </div>
-                )}
-
                 {/* Address Field */}
-                <div className="flex items-start gap-2 border-b-2 border-dashed border-amber-300/80 pb-1">
-                  <span className="font-black text-sm text-[#7A3E00] shrink-0">पता :</span>
-                  <span className="font-bold text-xs text-slate-800 line-clamp-2 leading-tight">
+                <div className="flex items-center gap-2 border-b-2 border-dashed border-amber-300/80 pb-1.5">
+                  <span className="w-[85px] shrink-0 font-black text-base text-[#7A3E00]">पता :</span>
+                  <span className="font-bold text-base text-slate-900 truncate">
                     {cardData.address || "____________________________________________"}
                   </span>
                 </div>
 
                 {/* Smart Card IC Chip & Motto */}
-                <div className="pt-1 flex items-center gap-3">
+                <div className="pt-2 flex items-center gap-3">
                   <SmartChipSvg />
                   <div className="flex flex-col justify-center border-l-3 border-[#FF9933] pl-2.5">
-                    <span className="text-[11px] font-black text-[#FF9933] uppercase tracking-wide leading-tight">
+                    <span className="text-[12px] font-black text-[#FF9933] uppercase tracking-wide leading-tight">
                       एक पहचान,
                     </span>
-                    <span className="text-[11px] font-black text-slate-800 uppercase tracking-wide leading-tight">
+                    <span className="text-[12px] font-black text-slate-800 uppercase tracking-wide leading-tight">
                       एक देश,
                     </span>
-                    <span className="text-[11px] font-black text-[#138808] uppercase tracking-wide leading-tight">
+                    <span className="text-[12px] font-black text-[#138808] uppercase tracking-wide leading-tight">
                       एक अभियान
                     </span>
                   </div>
@@ -283,7 +273,7 @@ export const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(
                 </div>
               </div>
 
-              {/* Center: National Motto Pill (Bright Warm Ivory/Gold Background) */}
+              {/* Center: National Motto Pill */}
               <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#FFFDF5] via-[#FFF9EA] to-[#FFFDF5] border-2 border-[#D4AF37] text-[11px] font-black text-[#8B4500] shadow-md">
                 {/* eslint-disable-next-html-element-suppress */}
                 <img

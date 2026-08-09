@@ -23,7 +23,6 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
       photo: null,
       name: "",
       idNo: "",
-      phone: "",
       address: "",
     });
   };
@@ -68,7 +67,7 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
           </label>
           <input
             type="text"
-            value={cardData.name}
+            value={cardData.name || ""}
             onChange={(e) => handleFieldChange("name", e.target.value)}
             placeholder="e.g. Anil Kumar"
             className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all"
@@ -82,23 +81,9 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
           </label>
           <input
             type="text"
-            value={cardData.idNo}
+            value={cardData.idNo || ""}
             onChange={(e) => handleFieldChange("idNo", e.target.value)}
             placeholder="e.g. IND-2026-7890"
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm font-mono transition-all"
-          />
-        </div>
-
-        {/* Mobile No */}
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
-            Mobile No.
-          </label>
-          <input
-            type="text"
-            value={cardData.phone}
-            onChange={(e) => handleFieldChange("phone", e.target.value)}
-            placeholder="e.g. +91 98765 43210"
             className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm font-mono transition-all"
           />
         </div>
@@ -110,9 +95,9 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
           </label>
           <textarea
             rows={3}
-            value={cardData.address}
+            value={cardData.address || ""}
             onChange={(e) => handleFieldChange("address", e.target.value)}
-            placeholder="e.g. 123, Bharat Marg, New Delhi"
+            placeholder="e.g. Garhwa, Jharkhand"
             className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm resize-none transition-all"
           />
         </div>
