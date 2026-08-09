@@ -52,25 +52,25 @@ export default function Home() {
           {/* Right Side: Live Card Preview & Download Action (7 cols) */}
           <div className="lg:col-span-7 flex flex-col space-y-6 lg:sticky lg:top-28">
             {/* Live Preview Card Box */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-xl border border-slate-200/80 dark:border-slate-800 space-y-4">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-3 sm:p-6 shadow-xl border border-slate-200/80 dark:border-slate-800 space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                   </span>
-                  <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                     लाइव कार्ड प्रीव्यू / Live Preview
                   </h2>
                 </div>
 
                 <span className="text-xs font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md">
-                  1600 × 1000 px High-Res
+                  1600 × 1000 px
                 </span>
               </div>
 
               {/* Card Rendering Container */}
-              <div className="w-full overflow-hidden flex items-center justify-center p-2 bg-slate-100/60 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800">
+              <div className="w-full overflow-hidden flex items-center justify-center p-1 sm:p-2 bg-slate-100/60 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800">
                 <CardPreview ref={cardRef} cardData={cardData} />
               </div>
             </div>
