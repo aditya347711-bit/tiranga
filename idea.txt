@@ -1,0 +1,194 @@
+Build a simple, polished Card Generator using Next.js, TypeScript, TSX and Tailwind CSS.
+
+IMPORTANT:
+- Frontend only
+- NO backend
+- NO database
+- NO API
+- NO login/signup
+- NO authentication
+- NO server storage
+- Everything must work directly in the browser
+- User enters details → card preview updates → Download instantly
+
+The design should be inspired by the uploaded reference image: a premium Indian/patriotic landscape identity card with cream, navy blue, saffron, green and gold styling. Create an ORIGINAL design, not an exact copy.
+
+FEATURES:
+
+1. SINGLE PAGE APP
+
+Create one clean page with:
+
+Header:
+"Indian Card Generator"
+
+Subtitle:
+"Create your personalized card instantly"
+
+2. FORM
+
+Add:
+
+Photo Upload
+- Upload JPG/PNG/WEBP
+- Show image preview
+- Replace/remove photo
+
+Name
+- Text input
+
+ID No.
+- Text input
+
+Address
+- Textarea
+
+Optional:
+- Date of Birth
+- Phone
+- Blood Group
+
+Keep the form simple and clean.
+
+3. LIVE CARD PREVIEW
+
+Show the card beside the form on desktop and below the form on mobile.
+
+Card should have:
+
+Heading:
+"मेरा भारत, मेरी पहचान"
+
+Subheading:
+"गर्व से कहें — हम भारतीय हैं"
+
+Left:
+- User uploaded photo inside a decorative frame
+
+Right:
+- नाम: user's name
+- ID No.: user's ID
+- पता: user's address
+
+Optional information should only appear when entered.
+
+Use:
+- Cream background
+- Navy blue
+- Saffron
+- Green
+- Gold
+- Decorative Indian-inspired patterns
+- Ashoka Chakra-inspired decorative element
+- Tricolor design elements
+- Premium border
+
+Add a small label such as:
+"PERSONAL IDENTITY CARD"
+
+Do NOT make it look like an official government-issued ID.
+
+4. INSTANT DOWNLOAD
+
+Add a large button:
+
+"Download Card"
+
+When clicked:
+- Generate the card as a high-resolution PNG
+- Download immediately
+- No server request
+- No page reload
+
+Filename:
+my-identity-card-{name}.png
+
+Use HTML Canvas or a client-side canvas library.
+
+The downloaded card must contain:
+- Background
+- Border
+- Photo
+- Name
+- ID
+- Address
+- Optional fields
+- All decorative elements
+- Hindi text
+
+Generate at high resolution, approximately 1600×1000 or similar.
+
+5. SIMPLE USER EXPERIENCE
+
+Flow should be:
+
+Upload Photo
+↓
+Enter Name
+↓
+Enter ID
+↓
+Enter Address
+↓
+See live preview
+↓
+Click "Download Card"
+↓
+Image downloads instantly
+
+No unnecessary steps.
+
+6. RESPONSIVE
+
+Desktop:
+Form + Preview side-by-side.
+
+Mobile:
+Form first
+Preview below
+Download button clearly visible.
+
+7. TECHNICAL
+
+Use:
+
+Next.js App Router
+TypeScript
+TSX
+Tailwind CSS
+
+Use reusable components:
+
+components/
+  CardForm.tsx
+  PhotoUploader.tsx
+  CardPreview.tsx
+  DownloadCard.tsx
+
+The main page can be:
+
+app/page.tsx
+
+Create a client component where necessary using:
+"use client"
+
+8. IMPORTANT
+
+Do not create:
+- Backend
+- API routes
+- Database
+- Login
+- Signup
+- Dashboard
+- Admin panel
+- Cloud storage
+- External image upload service
+
+The uploaded photo must remain in the browser.
+
+Do not add unnecessary features.
+
+Make the UI modern, attractive, fast and extremely simple.
+
+The final result should be a working card generator where a user can enter details, see the card immediately, and download the finished card instantly.
