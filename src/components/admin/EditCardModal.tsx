@@ -146,18 +146,20 @@ export const EditCardModal: React.FC<EditCardModalProps> = ({
             />
           </div>
 
-          {/* Phone (Optional) */}
+          {/* Phone (Optional - 10 Digits Only) */}
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-              Phone Number <span className="text-slate-400 font-normal">(Optional)</span>
+              Phone Number <span className="text-slate-400 font-normal">(Optional / 10 Digits)</span>
             </label>
             <input
               type="tel"
+              maxLength={10}
               value={formData.phone}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, phone: e.target.value }))
-              }
-              placeholder="e.g. +91 98765 43210"
+              onChange={(e) => {
+                const onlyNums = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                setFormData((prev) => ({ ...prev, phone: onlyNums }));
+              }}
+              placeholder="e.g. 9876543210 (10 digits)"
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-mono text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none"
             />
           </div>
