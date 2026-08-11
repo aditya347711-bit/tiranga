@@ -24,6 +24,7 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
       name: "",
       idNo: "",
       address: "",
+      phone: "",
     });
   };
 
@@ -84,6 +85,20 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
             value={cardData.idNo || ""}
             onChange={(e) => handleFieldChange("idNo", e.target.value)}
             placeholder="e.g. IND-2026-7890"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm font-mono transition-all"
+          />
+        </div>
+
+        {/* Phone Number (Optional) */}
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
+            Phone Number <span className="text-slate-400 font-normal text-xs">(Optional / ऐच्छिक)</span>
+          </label>
+          <input
+            type="tel"
+            value={cardData.phone || ""}
+            onChange={(e) => handleFieldChange("phone", e.target.value)}
+            placeholder="e.g. +91 98765 43210"
             className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm font-mono transition-all"
           />
         </div>

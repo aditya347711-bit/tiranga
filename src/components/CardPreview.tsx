@@ -227,6 +227,16 @@ export const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(
                   </span>
                 </div>
 
+                {/* Optional Phone Field */}
+                {cardData.phone && (
+                  <div className="flex items-center gap-2 border-b-2 border-dashed border-amber-300/80 pb-1.5">
+                    <span className="w-[85px] shrink-0 font-black text-base text-[#7A3E00]">फोन :</span>
+                    <span className="font-mono font-bold text-base text-slate-900 truncate">
+                      {cardData.phone}
+                    </span>
+                  </div>
+                )}
+
                 {/* Smart Card IC Chip & Motto */}
                 <div className="pt-2 flex items-center gap-3">
                   <SmartChipSvg />

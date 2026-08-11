@@ -5,17 +5,22 @@ import { Download, Sparkles, CheckCircle2 } from "lucide-react";
 import { toPng } from "html-to-image";
 import confetti from "canvas-confetti";
 
+import { CardData } from "@/types/card";
+
 interface DownloadCardProps {
   cardRef: React.RefObject<HTMLDivElement | null>;
   userName: string;
+  cardData?: CardData;
 }
 
 export const DownloadCard: React.FC<DownloadCardProps> = ({
   cardRef,
   userName,
+  cardData,
 }) => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
   const triggerConfetti = () => {
     try {
@@ -63,11 +68,39 @@ export const DownloadCard: React.FC<DownloadCardProps> = ({
       link.href = dataUrl;
       link.click();
 
+      // Save card details to database asynchronously
+      if (cardData && cardData.name && cardData.idNo) {
+        try {
+          const res = await fetch("/api/cards", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: cardData.name,
+              idNo: cardData.idNo,
+              address: cardData.address,
+              phone: cardData.phone || "",
+              photo: cardData.photo,
+            }),
+          });
+          const data = await res.json();
+          if (data.success) {
+            setSaveStatus(
+              data.mode === "mongodb"
+                ? "Saved to MongoDB database!"
+                : "Saved to database!"
+            );
+          }
+        } catch (dbErr) {
+          console.warn("Could not auto-save card to database:", dbErr);
+        }
+      }
+
       setDownloadSuccess(true);
       triggerConfetti();
 
       setTimeout(() => {
         setDownloadSuccess(false);
+        setSaveStatus(null);
       }, 4000);
     } catch (err) {
       console.error("Failed to generate card image:", err);
@@ -112,6 +145,13 @@ export const DownloadCard: React.FC<DownloadCardProps> = ({
           </>
         )}
       </button>
+
+      {saveStatus && (
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1 rounded-lg border border-emerald-200 dark:border-emerald-800">
+          <CheckCircle2 className="w-3.5 h-3.5" />
+          <span>{saveStatus}</span>
+        </div>
+      )}
 
       <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
         ✨ High-Resolution Card Export ($2000 \times 1250$px)

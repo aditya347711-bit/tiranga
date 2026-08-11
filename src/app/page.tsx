@@ -5,7 +5,7 @@ import { CardForm } from "@/components/CardForm";
 import { CardPreview, AshokaChakraSvg } from "@/components/CardPreview";
 import { DownloadCard } from "@/components/DownloadCard";
 import { CardData, DEFAULT_CARD_DATA } from "@/types/card";
-import { ShieldCheck, Sparkles, Flag, Heart } from "lucide-react";
+import { ShieldCheck, Heart } from "lucide-react";
 
 export default function Home() {
   const [cardData, setCardData] = useState<CardData>(DEFAULT_CARD_DATA);
@@ -33,10 +33,12 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Patriotic Badge Tag */}
-          <div className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300/60 text-amber-900 dark:text-amber-300 text-xs font-semibold">
-            <ShieldCheck className="w-4 h-4 text-amber-600" />
-            <span>100% Browser-Based Security & Privacy</span>
+          <div className="flex items-center gap-3">
+            {/* Patriotic Badge Tag */}
+            <div className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300/60 text-amber-900 dark:text-amber-300 text-xs font-semibold">
+              <ShieldCheck className="w-4 h-4 text-amber-600" />
+              <span>100% Browser-Based Security & Privacy</span>
+            </div>
           </div>
         </div>
       </header>
@@ -77,7 +79,11 @@ export default function Home() {
 
             {/* Prominent Download Button */}
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-xl border border-amber-300/40 dark:border-amber-900/40">
-              <DownloadCard cardRef={cardRef} userName={cardData.name} />
+              <DownloadCard
+                cardRef={cardRef}
+                userName={cardData.name}
+                cardData={cardData}
+              />
             </div>
           </div>
         </div>
