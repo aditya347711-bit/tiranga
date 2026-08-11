@@ -61,12 +61,14 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, idNo, address, phone, photo } = body;
 
-    if (!name || !idNo || !address) {
+    if (!name || !address) {
       return NextResponse.json(
-        { success: false, error: "Name, ID Number, and Address are required." },
+        { success: false, error: "Name and Address are required." },
         { status: 400 }
       );
     }
+
+    const finalIdNo = (idNo && idNo.trim()) || "IND-2026-7890";
 
     // Upload photo to Cloudinary CDN if photo is provided as base64
     const photoUrl = await uploadImageToCloudinary(photo);
@@ -76,7 +78,7 @@ export async function POST(request: Request) {
     if (isConnected && mode === "mongodb") {
       const newCard = await Card.create({
         name: name.trim(),
-        idNo: idNo.trim(),
+        idNo: finalIdNo,
         address: address.trim(),
         phone: phone ? phone.trim() : "",
         photo: photoUrl || null,
@@ -91,7 +93,7 @@ export async function POST(request: Request) {
       // Fallback in-memory mode
       const newCard = memoryStore.create({
         name: name.trim(),
-        idNo: idNo.trim(),
+        idNo: finalIdNo,
         address: address.trim(),
         phone: phone ? phone.trim() : "",
         photo: photoUrl || null,

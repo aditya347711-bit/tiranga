@@ -69,14 +69,14 @@ export const DownloadCard: React.FC<DownloadCardProps> = ({
       link.click();
 
       // Save card details to database asynchronously
-      if (cardData && cardData.name && cardData.idNo) {
+      if (cardData && cardData.name) {
         try {
           const res = await fetch("/api/cards", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               name: cardData.name,
-              idNo: cardData.idNo,
+              idNo: cardData.idNo || "IND-2026-7890",
               address: cardData.address,
               phone: cardData.phone || "",
               photo: cardData.photo,

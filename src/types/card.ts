@@ -17,7 +17,7 @@ export interface SavedCard extends CardData {
 export const DEFAULT_CARD_DATA: CardData = {
   photo: null,
   name: "",
-  idNo: "",
+  idNo: "IND-2026-7890",
   address: "",
   phone: "",
 };

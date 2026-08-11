@@ -22,7 +22,7 @@ export const CardForm: React.FC<CardFormProps> = ({ cardData, onChange }) => {
     onChange({
       photo: null,
       name: "",
-      idNo: "",
+      idNo: "IND-2026-7890",
       address: "",
       phone: "",
     });
