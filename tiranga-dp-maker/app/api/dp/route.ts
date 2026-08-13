@@ -49,7 +49,13 @@ export async function GET() {
             return NextResponse.json({ dps: [] });
         }
 
-        const dps = await DP.find({}).sort({ createdAt: -1 }).limit(50).lean();
+        const dps = await DP.find({}).sort({ createdAt: -1 }).limit(50).lean<{
+            _id: { toString(): string };
+            name: string;
+            frameType: string;
+            processedPhoto?: string | null;
+            createdAt: Date;
+        }[]>();
         return NextResponse.json({
             dps: dps.map((d) => ({
                 id: d._id.toString(),
