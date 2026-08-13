@@ -1,13 +1,19 @@
 import mongoose from "mongoose";
 import dns from "dns";
 
-try {
-  dns.setServers(["8.8.8.8", "1.1.1.1"]);
-} catch {
-  // Ignore DNS override errors in restricted environments
+// Ensure custom DNS resolution for MongoDB Atlas SRV lookup on Windows
+function configureDns() {
+  try {
+    dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
+    if (typeof dns.setDefaultResultOrder === "function") {
+      dns.setDefaultResultOrder("ipv4first");
+    }
+  } catch {
+    // Ignore DNS override errors in restricted environments
+  }
 }
 
-const MONGODB_URI = process.env.MONGODB_URI;
+configureDns();
 
 interface MongooseCache {
   conn: typeof mongoose | null;
@@ -43,20 +49,25 @@ if (!global.memoryCardStore) {
 }
 
 export async function connectToDatabase(): Promise<{ isConnected: boolean; mode: "mongodb" | "fallback" }> {
-  if (!MONGODB_URI || MONGODB_URI.trim() === "") {
+  const mongodbUri = process.env.MONGODB_URI;
+
+  if (!mongodbUri || mongodbUri.trim() === "") {
     return { isConnected: false, mode: "fallback" };
   }
 
-  if (cached.conn) {
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return { isConnected: true, mode: "mongodb" };
   }
+
+  configureDns();
 
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 10000,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+    cached.promise = mongoose.connect(mongodbUri, opts).then((mongooseInstance) => {
       return mongooseInstance;
     });
   }
