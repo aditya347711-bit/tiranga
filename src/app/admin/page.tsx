@@ -157,50 +157,69 @@ export default function AdminPage() {
     }
   };
 
-  // Export CSV
+  // Export CSV (Includes S.No., ID, Photo URL, Name, ID Number, Phone, Address, Created Date)
   const exportCSV = () => {
-    if (cards.length === 0) {
+    const list = sortedCards.length > 0 ? sortedCards : cards;
+    if (list.length === 0) {
       alert("No records to export!");
       return;
     }
-    const headers = ["ID", "Name", "ID Number", "Phone", "Address", "Created Date"];
-    const rows = cards.map((c) => [
-      `"${c._id}"`,
-      `"${c.name.replace(/"/g, '""')}"`,
-      `"${c.idNo.replace(/"/g, '""')}"`,
-      `"${(c.phone || "").replace(/"/g, '""')}"`,
-      `"${c.address.replace(/"/g, '""')}"`,
-      `"${new Date(c.createdAt).toLocaleString()}"`,
-    ]);
+    const headers = [
+      "S.No.",
+      "ID",
+      "Photo URL",
+      "Name",
+      "ID Number",
+      "Phone",
+      "Address",
+      "Created Date",
+    ];
+    const rows = list.map((c, index) => {
+      const serialNo = sortOrder === "newest" ? list.length - index : index + 1;
+      return [
+        `"${serialNo}"`,
+        `"${c._id}"`,
+        `"${(c.photo || "").replace(/"/g, '""')}"`,
+        `"${(c.name || "").replace(/"/g, '""')}"`,
+        `"${(c.idNo || "").replace(/"/g, '""')}"`,
+        `"${(c.phone || "").replace(/"/g, '""')}"`,
+        `"${(c.address || "").replace(/"/g, '""')}"`,
+        `"${new Date(c.createdAt).toLocaleString("en-IN")}"`,
+      ];
+    });
 
-    const csvContent =
-      "data:text/csv;charset=utf-8," +
-      [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
+    const csvContent = [headers.join(","), ...rows.map((e) => e.join(","))].join(
+      "\n"
+    );
 
-    const encodedUri = encodeURI(csvContent);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
+    link.href = url;
     link.setAttribute("download", `id_cards_export_${Date.now()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
-  // Export JSON
+  // Export JSON (Includes all fields including photo Cloudinary CDN URLs)
   const exportJSON = () => {
-    if (cards.length === 0) {
+    const list = sortedCards.length > 0 ? sortedCards : cards;
+    if (list.length === 0) {
       alert("No records to export!");
       return;
     }
-    const dataStr =
-      "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(cards, null, 2));
+    const jsonStr = JSON.stringify(list, null, 2);
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.setAttribute("href", dataStr);
+    link.href = url;
     link.setAttribute("download", `id_cards_export_${Date.now()}.json`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   // Sorting & Pagination calculations
